@@ -58,6 +58,11 @@ public class servidor {
 		return p_a*p_b;
 	}
 
+	public int dividir(int p_a, int p_b)
+	{
+		return p_a/p_b;
+	}
+
 	public int realizarOperacion(String p_Cadena)
 	{
 		String[] operacion = p_Cadena.split(",");
@@ -82,11 +87,18 @@ public class servidor {
 					{
 						res = multiplicar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));	
 					}	
-					else
-					{
+					else{
+							if(operacion[0].compareTo("div")==0)
+							{
+								res = dividir(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));
+							}
 						
-						res = -1;
-					}
+							else
+							{
+						
+								res = -1;
+							}
+						}
 				}
 			}
 			
