@@ -48,6 +48,11 @@ public class servidor {
 		return p_a+p_b;
 	}
 
+	public int restar(int p_a, int p_b)
+	{
+		return p_a-p_b;
+	}
+
 	public int multiplicar(int p_a, int p_b)
 	{
 		return p_a*p_b;
@@ -66,18 +71,25 @@ public class servidor {
 			{
 				res = sumar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));
 			}
-			else
-			{
-				if(operacion[0].compareTo("mult")==0)
+			else{
+				if(operacion[0].compareTo("resta")==0)
 				{
-					res = multiplicar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));	
-				}	
+					res = restar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));
+				}
 				else
 				{
-					
-					res = -1;
+					if(operacion[0].compareTo("mult")==0)
+					{
+						res = multiplicar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));	
+					}	
+					else
+					{
+						
+						res = -1;
+					}
 				}
 			}
+			
 			System.out.println("SRV: El resultado es: " + res);
 		}else
 		{
