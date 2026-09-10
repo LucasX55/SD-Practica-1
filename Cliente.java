@@ -3,6 +3,7 @@ import java.net.*;
 
 public class Cliente {
 
+	private int contaroperaciones = 0;
 	/*
 	* Lee datos del socket. Supone que se le pasa un buffer con hueco 
 	*	suficiente para los datos. Devuelve el numero de bytes leidos o
@@ -118,10 +119,12 @@ public class Cliente {
 				else
 					op = "mult";
 				resultado = pedirNumeros(op, resultado, Cadena, skCliente);
+				contaroperaciones++;
 				resp='x';
 				while(resp != 's' && resp != 'n')
 				{
 					System.out.println("El resultado es: " + resultado);
+					System.out.println("Has hecho " + contaroperaciones + " operaciones");
 					System.out.println("Desea realizar otra operacion? [s,n]: ");
 					resp = br.readLine().charAt(0);					
 				}
