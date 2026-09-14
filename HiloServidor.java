@@ -51,67 +51,45 @@ public class HiloServidor extends Thread {
 		return;
 	}
 	
-	public int sumar(int p_a, int p_b)
-	{
-		return p_a+p_b;
-	}
+	
 
-	public int multiplicar(int p_a, int p_b)
+	public String realizarOperacion(String p_Cadena)
 	{
-		return p_a*p_b;
-	}
-
-	public int realizarOperacion(String p_Cadena)
-	{
-		String[] operacion = p_Cadena.split(",");
-		int res=0;
+		String respuesta="";
+		String[] operacion = p_Cadena.split("#");
 		
-		System.out.println("SRV: La operacion es: " + operacion[0]);
-		if(operacion.length != 1)
+		
+		if(operacion.length != 3||!operacion[0].equals("REGISTRO"))
 		{
-			System.out.println("SRV: El operando 1 es " + operacion[1] + " y el operando 2 es " + operacion[2]);
-			if(operacion[0].compareTo("suma")==0)
-			{
-				res = sumar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));
-			}
-			else
-			{
-				if(operacion[0].compareTo("mult")==0)
-				{
-					res = multiplicar(Integer.parseInt(operacion[1]),Integer.parseInt(operacion[2]));	
-				}	
-				else
-				{
-					
-					res = -1;
-				}
-			}
-			System.out.println("SRV: El resultado es: " + res);
+			
+			respuesta = "STATUS#ERROR#Error al registrar la estacion";
+			
 		}else
 		{
-			res = -1;
+			System.out.println("SRV: La operacion es: " + operacion[0] + operacion[1] + " " + operacion[2]);
+
+			respuesta = "STATUS#OK#Estacion registrada correctamente";
 		}	
-		return (res);
+		return (respuesta);
 	}
 	
 	
 	
     public void run() {
-		int resultado=0;
+		String respuesta="";
 		String Cadena="";
 		
         try {
-			while (resultado != -1)
-			{
+			
+			
 				Cadena = this.leeSocket (skCliente, Cadena);
 				/*
 				* Se escribe en pantalla la informacion que se ha recibido del
 				* cliente
 				*/
-				resultado = this.realizarOperacion(Cadena);
-				Cadena = "" + resultado;
-				this.escribeSocket (skCliente, Cadena);						
-			}
+				respuesta = this.realizarOperacion(Cadena);
+				this.escribeSocket (skCliente, respuesta);						
+			
 			skCliente.close();
 			//System.exit(0); No se debe poner esta sentencia, porque en ese caso el primer cliente que cierra rompe el socket 
 			//				  y desconecta a todos				
