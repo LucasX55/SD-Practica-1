@@ -9,3 +9,9 @@ Tengo que cambiar algo de estas dos funciones para la 1b?
 
 
 Como lo ves (Inserte el código del WM_WS_M terminado)
+
+Prompts IA Lucas:
+
+Se como un profesor y explicame linea a linea como funciona el siguinte codigo
+
+
